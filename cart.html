@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Cart</title>
+<style>
+body { font-family: Arial; background:#f4f4f4; padding:20px; }
+.cart-box { background:white; padding:20px; border-radius:8px; max-width:400px; margin:auto; }
+.item { display:flex; justify-content:space-between; margin-bottom:10px; }
+.total { font-weight:bold; margin-top:15px; }
+button { background:#10b981; color:white; border:none; padding:10px; width:100%; margin-top:15px; cursor:pointer; }
+</style>
+</head>
+
+<body>
+
+<div class="cart-box">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <div class="total" id="totalPrice"></div>
+  <button onclick="buyNow()">Buy Now</button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cartItemsDiv = document.getElementById("cartItems");
+let totalDiv = document.getElementById("totalPrice");
+
+let total = 0;
+
+if(cart.length === 0){
+  cartItemsDiv.innerHTML = "Cart is empty";
+} else {
+  cart.forEach(item => {
+    let div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `<span>${item.name}</span><span>$${item.price}</span>`;
+    cartItemsDiv.appendChild(div);
+    total += item.price;
+  });
+}
+
+totalDiv.innerHTML = "Total: $" + total;
+
+function buyNow(){
+  alert("Purchase successful!");
+  localStorage.removeItem("cart");
+  window.location.reload();
+}
+</script>
+
+</body>
+</html>

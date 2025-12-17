@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E-Cart | Signup</title>
+<style>
+body {
+  font-family: Arial;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-box {
+  background: white;
+  padding: 25px;
+  width: 320px;
+  border-radius: 8px;
+}
+
+.signup-box h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="signup-box">
+  <h2>Create Account</h2>
+
+  <input type="text" id="name" placeholder="Full Name">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <input type="password" id="confirm" placeholder="Confirm Password">
+
+  <button onclick="signup()">Signup</button>
+
+  <p>Already have an account?
+    <a href="login.html">Login</a>
+  </p>
+</div>
+
+<script>
+function signup() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+  let confirm = document.getElementById("confirm").value;
+
+  if (!name || !email || !pass || !confirm) {
+    alert("All fields required");
+    return;
+  }
+
+  if (pass !== confirm) {
+    alert("Password not matching");
+    return;
+  }
+
+  let user = { name, email, pass };
+  localStorage.setItem("user", JSON.stringify(user));
+
+  alert("Signup successful! Please login");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
